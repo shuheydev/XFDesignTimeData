@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:XFDesignTimeData.Models"
+             mc:Ignorable="d"
+             x:Class="XFDesignTimeData.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label Text="{Binding Greeting}" d:Text="Hello My Xamarin.Forms!" 
+               d:BackgroundColor="Orange"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+        <ActivityIndicator
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            d:IsRunning="True"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+
+        <ListView>
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Item One</x:String>
+                    <x:String>Item Two</x:String>
+                    <x:String>Item Three</x:String>
+                </x:Array>
+            </d:ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell
+                       d:Text="{Binding .}"
+                       Detail="{Binding Location}"
+                       d:Detail="Location"
+                       ImageSource="{Binding Image}"
+                       d:ImageSource="icon.png"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView>
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type models:People}">
+                    <models:People Name="田中一郎" Location="東京都江戸川区"/>
+                    <models:People Name="鈴木次郎" Location="東京都渋谷区"/>
+                    <models:People Name="高橋三郎" Location="東京都港区"/>
+                </x:Array>
+            </d:ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:People">
+                    <ImageCell
+                       Text="{Binding Name}"
+                       Detail="{Binding Location}"
+                       ImageSource="{Binding Image}"
+                       d:ImageSource="icon.png"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
